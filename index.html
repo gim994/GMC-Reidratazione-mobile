@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMC Disidratazione</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="infoBox" class="info-box">
+<div class="header">
+<img src="https://res.cloudinary.com/dettkhosb/image/upload/v1732532486/GMC_SEMPLICE_lwtuvy.png" id="logo">
+<h1>
+  <p><em><strong>Reidratazione: quanta acqua e quanto sodio?</strong></em>
+  <br>
+  <small><em><strong>Una risposta rapida e precisa alla portata di tutti! </em></strong></small></p>
+</h1>
+</div>
+<p><strong>Introduzione</strong></p>
+<p>La reidratazione per via endovenosa è la strada da percorrere qualora per via orale o enterale non sia possibile (per la concomitanza di vomito, per la gravità del quadro. per la coesistenza di gravi diselettrolitemie o lo stato di coscienza compromesso). 
+Il presente lavoro si basa sul metodo pubblicato da G. Ardissino e A. Vergori nell’articolo <a href="https://www.medicoebambino.com/?id=OS2026_10.html" target="_blank">"G. Ardissino, A. Vergori. Gestione dei liquidi e del sodio nella reidratazione per via endovenosa in età pediatrica. Medico e Bambino pagine elettroniche 2020;23(26):156-163 DOI: https://doi.org/10.53126/MEBXXIIIL156"</a>
+di cui se ne consiglia la lettura per una più chiara comprensione dei meccanismi fisiopatologici e dell’approccio utilizzato nell’app che qui proponiamo.</p>
+<p>Il metodo si basa sulla divisione del programma di reidratazione in tre parti: 
+1. il recupero delle perdite avvenute, dato dalla differenza tra il peso in benessere (detto anche Working Weight) e il peso attuale (vedi formula n°3); 
+2. il recupero delle perdite prevedibili, qualora ci aspettiamo numerosi episodi di vomito o diarrea profusa o temperatura costantemente elevata che se non conteggiati potrebbero infiaciare il risultato (vedi formula n°6) e 
+3. i liquidi di mantenimento</p>
+<p>Qualora non si conosca il peso in benessere sarà possibile stimarlo sulla base dell'entità clinica della disidratazione utilizzando lo score di Gorelick, valido tra 1 e 60 mesi di vita (5 anni) (per i dettagli si rimanda a
+<a href="https://pubmed.ncbi.nlm.nih.gov/9113963/" target="_blank">"Gorelick, M. H., Shaw, K. N., & Murphy, K. O. (1997). Validity and reliability of clinical signs in the diagnosis of dehydration in children. Pediatrics, 99(5)"</a>.</p>
+<p>Un programma di reidratazione presuppone inoltre la conoscenza della natremia, che permette di classificare la disidratazione in iponatremica (&lt; 135 mEq/l), ipernatremica (&gt;145 mEq/l) o isonatriemica (tra 135 e 145 mEq/l). 
+Anche la glicemia è parametro indispensabile per la scelta della soluzione per evitare l’incongrua somministrazione di glucosio a bambini disidratati ma diabetici.</p>
+<p>Infine anche la creatinemia sarà utile per escludere la concomitante presenza di insufficienza renale, per escludere l’insufficienza renale, la cui presenza richiede accorgimenti speciali e diversi da quelli esposti che valgono per il bambino normale.</p>
+<p>In assenza di tutte queste informazioni potrà essere usata solo la soluzione fisiologica (NaCl 0.9% = 154 mEq/l) o Ringer (Sodio Lattato/Acetato 132 mEq/l). 
+Quanto già infuso (acqua e NaCl) sotto forma di soluzione fisiologica o Ringer (in attesa dell’esito degli accertamenti) andrà sottratto dal computo totale.</p>
+<p>E' bene che le variazioni di Na plasmatico siano tanto minori quanto più la natremia è alterata: 24 mEq/L/die per natriemie comprese tra 115 e 165 mEq/L; 12 mEq/L/die per natremie comprese tra 105-115 e 165-175 mEq/L; 6 mEq/L/die per  valori di partenza &gt;175 o &lt;105  mEq/L.</p> 
+<p>E' bene ricordare che questo calcolatore fornisce una stima matematica di come impostare la reidratazione. In corso d’opera il programma potrà/dovrà essere individualizzato anche sulla base dei valori di laboratorio e sulla situazione clinica del singolo paziente.</p>
+<p><strong>Per eventuali dubbi sulla compilazione basterà passare il cursore sopra al simbolo "?” per ottenere le specifiche relative al campo in esame</strong></p>
+<p></p>
+<h1><p><strong>Autori:</strong></p></h1>  
+<ol>
+<li><strong>Gian Mario Cortes</strong>, Medico Specializzando presso la Scuola di Specializzazione in Pediatria dell'Università degli studi di Cagliari ha creato la pagina web e inserito i calcoli che esulano dall'articolo di G.Ardissino</li>
+<li><strong>Gianluigi Ardissino</strong>, Centro per la Cura e lo Studio della Sindrome Emolitica Uremica (Center for HUS control, prevention and management) presso la Nefrologia, Dialisi e Trapianto Pediatrico della Fondazione IRCCS Ca’ Granda Ospedale Maggiore Policlinico di Milano.</li>
+</ol>
+<button id="closeButton">Ok ho letto</button>
+</div>
+</div>
+<div id="formulebox" class="info-box">
+<p><strong>Formule usate:</strong></p>
+<ol>
+<li>Acqua Corporea (%) = 0.7 (neonato &lt; 30 giorni) 0.6 (bambino/adulto) 0.5 (anziano &gt; 65 anni)</li>
+
+<li>Na attuale corretto per glicemia (mmol/l)= Na attuale (mmol/l) + 0.024 (dl/mg) * (glicemia (mg/dl) - 100(mg/dl))</li>
+
+<li>Perdite (ml) = (Working Weight (Kg) - Peso Attuale (Kg))*1000</li>	
+
+<li>Perdite Na (mEq) = Perdite (ml) * 0.140 (mEq/ml)</li>
+
+<li>Perdite (ml/kg)=  Perdite (ml)/ Working Weight (Kg)</li>
+
+<li>Perdite Prevedibili (ml) =((N°vomiti previsti*2 ml* Peso Attuale (Kg)) + (N° scariche di diarrea previste * 50 ml) + (10 ml * Peso Attuale (Kg) * (Temperatura (°C) - 38°C)))</li>
+
+<li>Perdite Prevedibili Na (mEq) =  Perdite Prevedibili (ml) * 0.140 (mEq/ml)</li>
+
+<li>Perdite Prevedibili (ml/kg) =  Perdite Prevedibili (ml)/ Peso Attuale (Kg)</li>
+
+<li>Mantenimento (ml) = vedi articolo citato nelle istruzioni</li>
+
+<li>Mantenimento Na (mEq) = 2* Working Weight (Kg) (età &lt; 6 mesi); 3* Working Weight (Kg)(età tra 6 mesi e 3 anni); 4* Working Weight (Kg) (età &gt; 3 anni)</li>
+
+<li>Mantenimento (ml/kg) = Mantenimento (ml)/ Working Weight (Kg)</li>
+
+<li>Velocità di Mantenimento (ml/h) = Mantenimento (ml)/24 (h)</li>
+
+<li>Mantenimento flusso del glucosio (mg/kg/min) = (Mantenimento (ml) * 10 * Soluzione di partenza Glucosio (%)) / Working Weight (Kg) / 1440</li>
+
+<li>Eccesso / difetto di Na (mEq) = (Na desiderato (mmol/l) - Na attuale corretto per glicemia (mmol/l)) * Acqua Corporea (%)) * Working Weight (Kg)</li>
+
+<li>Volume totale (ml) = Perdite (ml) + Perdite Prevedibili (ml) + ml Mantenimento (ml)</td>
+
+<li>Totale Na (mEq) = Perdite Na (mEq) + Eccesso / difetto di Na (mEq) + Perdite Prevedibili Na (mEq) + Mantenimento Na (mEq)</li>
+
+<li>Volume totale per Kg di peso (ml/kg) =  Volume totale (ml) / Working Weight (Kg)</li>
+
+<li>Velocità d'infusione(ml/h) = Volume totale (ml)/24</li>
+
+<li>Flusso di glucosio (mg/kg/min) = ((Volume totale (ml) * 10 * Soluzione di partenza Glucosio (%)) / Working Weight (Kg) / 1440)</li>
+
+</ol>
+<button id="closeButton2">Chiudi</button>
+</div>
+<!-- Bottone hamburger (fuori dal pannello) -->
+<button id="menuToggle" aria-controls="container01" aria-expanded="false" aria-label="Apri menu" class="menu-hamburger">
+  <span></span><span></span><span></span>
+</button>
+
+<div id="container01" class="containermenù">
+  <button id="menuClose" class="menu-close" aria-label="Chiudi menu">✕</button>
+  
+<h2>Menù							
+<div class="tooltip-icon" id="tooltipIcon23">?
+            <div class="tooltip-text" id="tooltipText23">
+			I pulsanti a seguire possono servire per un calcolo avanzato in specifiche situazioni cliniche.                        
+		            </div>
+        </div></h2>
+	<div class="option-buttons1">
+        <button id="advancedBtn" class="square-btn">Avanzato</button>
+        <button id="specificheBtn" class="square-btn">Dettaglio</button>
+        <button id="ScoreBtn" class="square-btn">Score</button>
+        <button id="resetAllBtn" class="square-btn">Reset</button>
+		<button id="toggleInfoBox" class="square-btn">Info</button>
+		<button id="formuleBtn" class="square-btn">Formule</button>		
+    </div>
+	</div>
+	<!-- Backdrop per il menu (nuovo) -->
+<div id="menuBackdrop" class="menu-backdrop" hidden></div>
+
+<div id="container1" class="container">
+<h2>Compila i seguenti campi</h2>
+    <div class="option-buttons">
+        <button id="dateButton" class="square-btn">Data di nascita</button>
+        <button id="menuButton" class="square-btn">Seleziona età</button>
+    </div>
+    <div id="dateInputContainer" class="input-container">
+        <label for="birthdate">Data di nascita:</label>
+        <input type="date" id="birthdate">
+    </div>
+    <div id="ageInputContainer" class="input-container">
+        <label for="ageType">Età:</label>
+        <div class="age-selection">
+            <select id="ageType">
+                <option value="years">Anni</option>
+                <option value="months">Mesi</option>
+                <option value="days">Giorni</option>
+            </select>
+            <input type="number" id="ageValue" min="0">
+        </div>
+    </div>
+    <div id="birthWeightContainer" class="input-container hidden">
+        <label for="birthWeight">Peso alla Nascita (Kg):</label>
+        <input type="number" id="birthWeight" min="0" step="0.1">
+    </div>
+    <div id="numberInput1Container" class="input-container">
+        <label for="WA">Peso Attuale (Kg):
+			<div class="tooltip-icon" id="tooltipIcon">?
+    <div class="tooltip-text" id="tooltipText">
+	Inserire nel campo sottostante il peso attuale in Kg rilevato al momento della visita, servirà per il calcolo delle perdite rispetto al peso in benessere. Se sconosciuto cliccare su "Score" poi su "Peso Attuale Sconosciuto" e compilare i menù a tendina. </div>
+	</div>
+	</label>
+        <input type="number" id="WA" placeholder="Kg" step="0.5">
+    </div>	
+    <div id="numberInput2Container" class="input-container">
+        <label for="WW">Peso in Benessere/ Working Weight (Kg):
+		        <div class="tooltip-icon" id="tooltipIcon2">?
+            <div class="tooltip-text" id="tooltipText2">
+    Inserire nel campo sottostante il peso in benessere in Kg se conosciuto, servirà per il calcolo delle perdite sottraendo il peso attuale e per il calcolo del mantenimento. Se sconosciuto cliccare su "Score" poi su "Peso in Benessere Sconosciuto" e compilare i menù a tendina.
+            </div>
+        </div>
+		</label>
+        <input type="number" id="WW" placeholder="Kg" step="0.5">
+    </div>
+    <div id="numberInput3Container" class="input-container">
+        <label for="Nai">Na iniziale (mmol/l o mEq/l):
+		<div class="tooltip-icon" id="tooltipIcon3">?
+            <div class="tooltip-text" id="tooltipText3">
+			Inserire il valore di sodio ematico in mmol/l o mEq/l. Servirà per il calcolo dei mEq in eccesso o in difetto da aggiungere o sottrarre a quelli calcolati per un paziente isonatremico.
+		            </div>
+        </div>
+		</label>
+        <input type="number" id="Nai" placeholder="mmol/l o mEq/l" step="0.5">
+    </div>
+    <div id="numberInput4Container" class="input-container">
+        <label for="Nap">Na desiderato dopo 24 ore d'infusione (mmol/l o mEq/l):
+				<div class="tooltip-icon" id="tooltipIcon4">?
+            <div class="tooltip-text" id="tooltipText4">
+			Se il sodio iniziale è compreso tra 115-164 inserire il valore convenzionale di 135-140 mEq/l. Se il sodio iniziale è compreso tra 106-115 o tra 165-174 inserire un valore tale per cui la differenza con il sodio iniziale non superi i 12 mEq/l/die (ad es. Na iniziale 110 mEq/L il valore da inserire non potrà essere superiore a 122 o se 170 non potrà essere inferiore a 158). Se il sodio iniziale è <106 o >174 inserire un valore tale per cui la la differenza con il sodio iniziale non superi i 6 mEq/l/die.
+		            </div>
+        </div>
+		</label>
+        <select id="Nap"></select>
+    </div>
+    <div id="numberInput%Container" class="input-container">	
+			<label for="infusionepercentglu">Seleziona la % di glucosio della soluzione da utilizzare:
+			<div class="tooltip-icon" id="tooltipIcon5">?
+            <div class="tooltip-text" id="tooltipText5">
+			Inserire nel campo sottostante la % di glucosio della soluzione di partenza. In questa maniera vengono calcolati il flusso di glucosio in mg/kg/min in relazione alla velocità d'infusione. Attenzione a non ottenere un flusso di glucosio troppo elevato.
+		    </div>
+			</div>						
+			</label>
+    <select id="infusionepercentgluType">
+            <option value="G0">0</option>	
+            <option value="G2.5">2,5</option>
+            <option value="G5">5</option>
+            <option value="G10">10</option>
+	</select>			
+    </div>	
+	 <div id="advancedContainer" class="input-container hidden">
+        <div id="vomitiContainer" class="input-container">
+            <label for="vomiti">n° Vomiti attesi:
+							<div class="tooltip-icon" id="tooltipIcon6">?
+            <div class="tooltip-text" id="tooltipText6">
+			Inserire il numero di vomiti attesi nelle 24 ore successive sulla base di quelli osservati nelle 24 ore precedenti.  Questo dato entrerà nel computo delle perdite prevedibili per la correzione.
+		            </div>
+        </div>
+			</label>
+            <input type="number" id="vomiti" placeholder="Numero">
+        </div>
+        <div id="diarreaContainer" class="input-container">
+			<label for="diarrea">n° Scariche di Diarrea attese:
+		<div class="tooltip-icon" id="tooltipIcon7">?
+        <div class="tooltip-text" id="tooltipText7">
+		Inserire il numero di scariche di diarrea nelle 24 ore passate. Entrerà nel computo delle perdite prevedibili per la correzione.
+		 </div>
+        </div>
+			</label>
+            <input type="number" id="diarrea" placeholder="Numero">
+        </div>
+        <div id="temperaturaContainer" class="input-container">
+            <label for="temperatura">Temperatura °C attuale:
+							<div class="tooltip-icon" id="tooltipIcon8">?
+            <div class="tooltip-text" id="tooltipText8">
+			Inserire la temperatura, se iperpiressia. Entrerà nel computo delle perdite prevedibili per la correzione.
+		            </div>
+        </div>
+			</label>
+            <input type="number" id="temperatura" placeholder="°C" step="0.1">
+        </div>
+        <div id="glicemiaContainer" class="input-container">
+            <label for="glicemia">Glicemia (mg/dl):
+							<div class="tooltip-icon" id="tooltipIcon9">?
+            <div class="tooltip-text" id="tooltipText9">
+			Inserire il valore di glicemia in mg/dl. Servirà a correggere il valore di sodiemia quando è presente iperglicemia e verrà utilizzato il corrispondente valore per la correzione.
+		            </div>
+        </div>
+			</label>
+            <input type="number" id="glicemia" placeholder="mg/dl" value="100">
+        </div>
+        <div id="naCorrettoContainer" class="input-container">
+            <label for="naCorretto">Na iniziale alla glicemia indicata (mmol/l o mEq/l):
+							<div class="tooltip-icon" id="tooltipIcon10">?
+            <div class="tooltip-text" id="tooltipText10">
+			Sodio ematico iniziale corretto per la glicemia inserita.
+		            </div>
+        </div>
+			</label>
+            <output id="naCorretto" class="output-field"></output>
+        </div>
+    </div>	
+</div>
+<!-- FRECCIA IN MEZZO -->
+<!-- FRECCIA TRA I DUE CONTAINER -->
+<div class="arrow">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+    </svg>
+</div>
+<div id="container2" class="container2">
+<h2>Infusione ideale</h2>
+        <div id="numberOutput3Container" class="output-container">
+        <label for="mlOutputValue">Volume da infondere in 24 ore (ml):
+						<div class="tooltip-icon" id="tooltipIcon20">?
+            <div class="tooltip-text" id="tooltipText20">
+			Questo valore indica il volume di liquidi in ml da infondere in 24 ore.
+		            </div>
+        </div>
+		</label>
+		<output id="mlOutputValue" class="output-field"></output>
+    </div> 
+	        <div id="numberOutput5Container" class="output-container">
+        <label for="nameqOutputValue">Na da aggiungere al volume da infondere (mEq):
+						<div class="tooltip-icon" id="tooltipIcon22">?
+            <div class="tooltip-text" id="tooltipText22">
+			Questo valore indica il valore in mEq del sodio da aggiungere al volume di liquidi sopra indicato da infondere in 24 ore.
+		            </div>
+        </div>
+		</label>
+		<output id="nameqOutputValue" class="output-field"></output>
+    </div> 
+	<div id="numberOutput1Container" class="output-container">
+        <label for="naOutputValue">Concentrazione Na (mEq/l):
+						<div class="tooltip-icon" id="tooltipIcon18">?
+            <div class="tooltip-text" id="tooltipText18">
+			Il valore nel campo sottostante rappresenta la concentrazione di sodio della soluzione da utilizzare per la correzione. Viene calcolato dividendo i mEq calcolati nel computo totale, presenti nel campo soprastante per i litri da infondere in 24 ore. 
+		            </div>
+        </div>
+		</label>
+        <output id="naOutputValue" class="output-field"></output>
+    </div>  
+	    <div id="numberOutput2Container" class="output-container">
+        <label for="mlhOutputValue">Velocità (ml/h):
+						<div class="tooltip-icon" id="tooltipIcon19">?
+            <div class="tooltip-text" id="tooltipText19">
+			Il valore nel campo sottostante indica la velocità in ml/h da impostare per la correzione.
+		            </div>
+        </div>
+		</label>
+        <output id="mlhOutputValue" class="output-field"></output>
+    </div>
+    <div id="numberOutput4Container" class="output-container">
+        <label for="glucosioOutputValue">Flusso di glucosio (mg/kg/min):
+		<div class="tooltip-icon" id="tooltipIcon21">?
+            <div class="tooltip-text" id="tooltipText21">
+			Il valore nel campo sottostante indica il flusso di glucosio in mg/kg/min in relazione alla % di glucosio utilizzata, alla velocità d'infusione e ad altre eventuali soluzioni utilizzate. Attenzione a non ottenere un flusso di glucosio troppo elevato.
+		            </div>
+        </div>
+		</label>
+        <output id="glucosioOutputValue" class="output-field"></output>
+    </div>
+    </div>
+</div>		
+<div id="container3" class="container-large">
+<div id="Scoretable" class="hidden">
+     <table>
+         <tr>
+             <td colspan="3">
+                 <button id="pesoBenessereBtn" class="square-btn active">Peso in Benessere non noto</button>
+                 <button id="pesoAttualeBtn" class="square-btn">Peso Attuale non noto</button>
+				 <button id="resetScoreBtn" class="square-btn">Reset Score</button>
+             </td>
+         </tr>
+         <tr id="scoreTitleRow">
+             <td colspan="3">Score di Gorelick per Peso in Benessere non noto, completa i campi</td>
+         </tr>
+            <tr>
+                <td>Condizioni generali</td>
+                <td>
+                    <select id="condizioniGenerali" class="score-select">
+                        <option value="0">Allerta</option>
+                        <option value="1">Letargia, Inquieto</option>
+                    </select>
+                </td>
+                <td id="score1">0</td>
+            </tr>
+            <tr>
+                <td>Refill</td>
+                <td>
+                    <select id="refill" class="score-select">
+                        <option value="0">Normale</option>
+                        <option value="1">Prolungato</option>
+                    </select>
+                </td>
+                <td id="score2">0</td>
+            </tr>
+            <tr>
+                <td>Lacrime</td>
+                <td>
+                    <select id="lacrime" class="score-select">
+                        <option value="0">Presenti</option>
+                        <option value="1">Assenti</option>
+                    </select>
+                </td>
+                <td id="score3">0</td>
+            </tr>
+            <tr>
+                <td>Mucose</td>
+                <td>
+                    <select id="mucose" class="score-select">
+                        <option value="0">Umide</option>
+                        <option value="1">Secche</option>
+                    </select>
+                </td>
+                <td id="score4">0</td>
+            </tr>
+            <tr>
+                <td>Occhi</td>
+                <td>
+                    <select id="occhi" class="score-select">
+                        <option value="0">Normali</option>
+                        <option value="1">Depressi</option>
+                    </select>
+                </td>
+                <td id="score5">0</td>
+            </tr>
+            <tr>
+                <td>Respiro</td>
+                <td>
+                    <select id="respiro" class="score-select">
+                        <option value="0">Normale</option>
+                        <option value="1">Profondo/ Rapido</option>
+                    </select>
+                </td>
+                <td id="score6">0</td>
+            </tr>
+            <tr>
+                <td>Polso</td>
+                <td>
+                    <select id="polso" class="score-select">
+                        <option value="0">Normale</option>
+                        <option value="1">Debole</option>
+                    </select>
+                </td>
+                <td id="score7">0</td>
+            </tr>
+            <tr>
+                <td>Elasticità cutanea</td>
+                <td>
+                    <select id="elasticitaCutanea" class="score-select">
+                        <option value="0">Ritorno immediato</option>
+                        <option value="1">Ritorno rallentato</option>
+                    </select>
+                </td>
+                <td id="score8">0</td>
+            </tr>
+            <tr>
+                <td>Frequenza Cardiaca</td>
+                <td>
+                    <select id="frequenzaCardiaca" class="score-select">
+                        <option value="0">Normale</option>
+                        <option value="1">Tachicardia</option>
+                    </select>
+                </td>
+                <td id="score9">0</td>
+            </tr>
+            <tr>
+                <td>Urine</td>
+                <td>
+                    <select id="urine" class="score-select">
+                        <option value="0">Normale</option>
+                        <option value="1">Ridotto (non ha urinato in molte ore)</option>
+                    </select>
+                </td>
+                <td id="score10">0</td>
+            </tr>
+            <tr>
+                <td>Score Totale</td>
+                <td></td>
+                <td id="totalScore">0</td>
+            </tr>
+            <tr>
+        <tr id="pesoStimatoRow">
+            <td id="pesoStimatoLabel">Peso in Benessere/ Working Weight stimato (Kg)</td>
+            <td><input type="number" id="WWs" readonly></td>
+        </tr>
+    </table>     
+</div>
+</div>
+</div>
+<div id="container4" class="container4">
+    <!-- Tabella di Specifiche -->
+    <div id="Specifichetable" class="hidden">
+       <table>
+            <tr>
+                <td colspan="9">Dettaglio del calcolo relativo al programma infusionale</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Volume (ml)</td>
+                <td>Na (mEq)</td>
+                <td>Volume (ml/kg)</td>
+                <td>Velocità d'infusione (ml/h)</td>
+                <td>Concentrazione Na (mEq/l)</td>
+                <td colspan="3">Flusso di Glucosio (mg/kg/min)</td>          
+            </tr>
+            <tr>
+                <td>Perdite</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td>Perdite Prevedibili</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>       
+            <tr>
+                <td>Mantenimento</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td>Eccesso / difetto di sodio</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>  
+            <tr>
+                <td>Totale</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td colspan="3"></td>
+            </tr>
+		</table>
+		</div>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
