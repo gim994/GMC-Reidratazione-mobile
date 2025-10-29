@@ -9,7 +9,7 @@
 <body>
 <div id="infoBox" class="info-box">
 <div class="header">
-<img src="https://res.cloudinary.com/dettkhosb/image/upload/v1732532486/GMC_SEMPLICE_lwtuvy.png" id="logo">
+<img src="GMC_SEMPLICE_lwtuvy.png" id="logo" alt="GMC">
 <h1>
   <p><em><strong>Reidratazione: quanta acqua e quanto sodio?</strong></em>
   <br>
@@ -112,7 +112,7 @@ Quanto già infuso (acqua e NaCl) sotto forma di soluzione fisiologica o Ringer 
 	</div>
 	<!-- Backdrop per il menu (nuovo) -->
 <div id="menuBackdrop" class="menu-backdrop" hidden></div>
-
+<div class="main-row">
 <div id="container1" class="container">
 <h2>Compila i seguenti campi</h2>
     <div class="option-buttons">
@@ -168,7 +168,7 @@ Quanto già infuso (acqua e NaCl) sotto forma di soluzione fisiologica o Ringer 
         <input type="number" id="Nai" placeholder="mmol/l o mEq/l" step="0.5">
     </div>
     <div id="numberInput4Container" class="input-container">
-        <label for="Nap">Na desiderato dopo 24 ore d'infusione (mmol/l o mEq/l):
+        <label for="Nap">Na desiderato dopo 24 ore d'infusione (mEq/l):
 				<div class="tooltip-icon" id="tooltipIcon4">?
             <div class="tooltip-text" id="tooltipText4">
 			Se il sodio iniziale è compreso tra 115-164 inserire il valore convenzionale di 135-140 mEq/l. Se il sodio iniziale è compreso tra 106-115 o tra 165-174 inserire un valore tale per cui la differenza con il sodio iniziale non superi i 12 mEq/l/die (ad es. Na iniziale 110 mEq/L il valore da inserire non potrà essere superiore a 122 o se 170 non potrà essere inferiore a 158). Se il sodio iniziale è <106 o >174 inserire un valore tale per cui la la differenza con il sodio iniziale non superi i 6 mEq/l/die.
@@ -247,17 +247,17 @@ Quanto già infuso (acqua e NaCl) sotto forma di soluzione fisiologica o Ringer 
 </div>
 <!-- FRECCIA IN MEZZO -->
 <!-- FRECCIA TRA I DUE CONTAINER -->
-<div class="arrow">
-    <svg xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke-width="2"
-         stroke-linecap="round"
-         stroke-linejoin="round">
-        <line x1="5" y1="12" x2="19" y2="12"/>
-        <polyline points="12 5 19 12 12 19"/>
-    </svg>
-</div>
+ <div class="arrow">
+        <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+        </svg>
+    </div>
 <div id="container2" class="container2">
 <h2>Infusione ideale</h2>
         <div id="numberOutput3Container" class="output-container">
@@ -311,7 +311,7 @@ Quanto già infuso (acqua e NaCl) sotto forma di soluzione fisiologica o Ringer 
         <output id="glucosioOutputValue" class="output-field"></output>
     </div>
     </div>
-</div>		
+</div>	
 <div id="container3" class="container-large">
 <div id="Scoretable" class="hidden">
      <table>
@@ -441,67 +441,70 @@ Quanto già infuso (acqua e NaCl) sotto forma di soluzione fisiologica o Ringer 
 </div>
 <div id="container4" class="container4">
     <!-- Tabella di Specifiche -->
-    <div id="Specifichetable" class="hidden">
-       <table>
-            <tr>
-                <td colspan="9">Dettaglio del calcolo relativo al programma infusionale</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Volume (ml)</td>
-                <td>Na (mEq)</td>
-                <td>Volume (ml/kg)</td>
-                <td>Velocità d'infusione (ml/h)</td>
-                <td>Concentrazione Na (mEq/l)</td>
-                <td colspan="3">Flusso di Glucosio (mg/kg/min)</td>          
-            </tr>
-            <tr>
-                <td>Perdite</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td>Perdite Prevedibili</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="3"></td>
-            </tr>       
-            <tr>
-                <td>Mantenimento</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td>Eccesso / difetto di sodio</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="3"></td>
-            </tr>  
-            <tr>
-                <td>Totale</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td colspan="3"></td>
-            </tr>
-		</table>
-		</div>
+<div id="Specifichetable" class="hidden">
+  <div class="specifiche-wrapper">
+    <table class="specifiche-table">
+        <tr>
+            <th colspan="7">
+                Dettaglio del calcolo relativo al programma infusionale
+            </th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Volume (ml)</th>
+            <th>Na (mEq)</th>
+            <th>Volume (ml/kg)</th>
+            <th>Velocità d'infusione (ml/h)</th>
+            <th>Concentrazione Na (mEq/l)</th>
+            <th>Flusso di Glucosio (mg/kg/min)</th>
+        </tr>
+        <tr>
+            <td>Perdite</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Perdite Prevedibili</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Mantenimento</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Eccesso / difetto di sodio</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Totale</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+  </div>
 </div>
 </div>
 <script src="script.js"></script>
