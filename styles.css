@@ -1,15 +1,15 @@
 body {
     font-family: Arial, sans-serif;
-	text-align: left;
-    margin: 20px;
-	margin-left: 20px;
-	margin-right: 20px;
-    padding: 0;
+    text-align: left;
     background-color: #f4f4f4;
-    display: flex;
-    justify-content: space-between;
-	flex-wrap: wrap;
+
+    display: block;
+    margin: 0;
+    padding: 20px 10px;
+
+    touch-action: pan-y;
 }
+
 
 .header {
     display: flex;
@@ -38,82 +38,6 @@ body {
   display: none;
 }
 
-
-/* --- FRECCIA TRA I CONTAINER --- */
-.arrow {
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.3s ease;
-  /* niente transform fisso qui:
-     lo gestiamo via JS così è centrata in verticale */
-  order: 1; /* si posiziona tra container1 e container2 nel flex generale */
-}
-
-.arrow svg {
-  width: 100%;
-  height: 100%;
-  stroke: #ff0000;      /* rosso come il resto dell'interfaccia */
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-
-  /* opzionale estetico: leggero effetto hover su desktop
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
-  transition: transform 0.3s ease, stroke 0.3s ease;
-  */
-}
-
-/* opzionale estetico hover:
-.arrow:hover svg {
-  transform: scale(1.1);
-  stroke: #cc0000;
-}
-*/
-
-/* MOBILE / SCHERMI PICCOLI
-   Non ruotiamo più via CSS, lasciamo che la rotazione la faccia JS.
-   Qui mettiamo solo spaziatura verticale più carina.
-*/
-
-/* Suggerimento per allineare gli elementi in alto sul desktop.
-   Se già ti piace l'allineamento attuale puoi anche non aggiungerlo.
-*/
-@media (min-width: 701px) {
-  body {
-    align-items: flex-start;
-  }
-}
-
-/* Modalità mobile/colonna forzata */
-.mobile-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;        /* così gli elementi figli non restano stretti sul lato */
-  gap: 10px;
-}
-
-/* In questa modalità, i container e la freccia diventano blocchi a tutta larghezza */
-.mobile-stack-child {
-  width: 100%;
-  max-width: 600px;   /* estetica: non diventano troppo larghi su tablet */
-}
-
-.mobile-stack .arrow {
-  /* qui la freccia occupa una riga tutta sua e sta in mezzo */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto 20px auto;
-}
-
-
-
-
 /* Stile per il cerchietto con il punto interrogativo */
 .input-container label {
     margin-right: 4px; /* Spazio tra l'etichetta e l'icona */
@@ -125,45 +49,106 @@ body {
     white-space: nowrap; /* Impedisce che l'etichetta vada a capo */
 }
 
+/* ===== ICONA "?" SEMPRE UGUALE ===== */
 .tooltip-icon {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+
     width: 24px;
     height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+
     background-color: #ff0000;
-    color: white;
+    color: #fff;
     border-radius: 50%;
     font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
     cursor: pointer;
-    font-family: Arial, sans-serif;
-    position: relative;
+
+    position: relative;     /* l'icona è il riferimento per il tooltip */
+    vertical-align: middle;
+    margin-left: 6px;
 }
 
-/* Tooltip per il testo */
+/* ===== TOOLTIP BASE (desktop) ===== */
 .tooltip-text {
     display: none;
     position: absolute;
     top: -5px;
-    left: 30px; /* Sposta il testo del tooltip a destra dell'icona */
-    width: 300px;
+    left: 30px;             /* a destra del pallino */
+    max-width: 280px;
     padding: 10px;
     background-color: #333;
-    color: white;
+    color: #fff;
     border-radius: 4px;
     white-space: normal;
     font-size: 14px;
-    z-index: 10;
+    line-height: 1.4;
+    z-index: 2000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* Mostra il tooltip al passaggio del mouse */
-.tooltip-icon:hover .tooltip-text {
-    display: flex;
+/* mostra su hover desktop o se JS mette .show */
+.tooltip-icon:hover .tooltip-text,
+.tooltip-icon .tooltip-text.show {
+    display: block;
 }
 
-.tooltip-text.show {
-    opacity: 1;
+/* ===== MOBILE FINO A 600px ===== */
+@media (max-width: 600px) {
+
+  /* l'icona resta identica */
+  .tooltip-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  /* tooltip mobile:
+     - lo mettiamo SOTTO l'icona
+     - limitiamo la larghezza all'80% viewport
+     - e lo spostiamo leggermente a sinistra così non esce fuori dallo schermo a destra
+  */
+  .tooltip-icon .tooltip-text {
+    top: 28px;              /* sotto il pallino */
+    left: auto;
+    right: 0;               /* agganciato al bordo destro dell'icona */
+    transform: translateX( -49px ); 
+    max-width: 80vw;
+    min-width: 140px;
+    width: max-content;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    padding: 10px;
+    z-index: 3000;
+
+    display: none; /* resta nascosto finché non è hover/.show */
+  }
+
+  /* mostrare su hover/tap */
+  .tooltip-icon:hover .tooltip-text,
+  .tooltip-icon .tooltip-text.show {
+    display: block;
+  }
 }
+
+
 
 .info-box {
   position: fixed;
@@ -215,72 +200,25 @@ body {
 }
 
 
-.container {
+.container,
+.container2,
+.container-large,
+.container4,
+.containermenù {
     background-color: #f4f4f4;
     font-size: 13px;
     font-weight: bold;
     padding: 10px;
     border-radius: 2px;
-    flex: 1 1 80px; /* Permette ai container di avere una base di 300px ma di crescere se c'è spazio */
-    margin-bottom: 20px; /* Spazio tra i container verticalmente */
-	margin-right: 50px;
-	margin-left: 50px;
-    border: none; /* Rimuove il bordo esterno */
-	align-self: baseline;	
-	order: 0;
+    border: none;
+
+    /* nuovo layout responsive */
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+    margin: 0 auto 20px auto; /* centrato e con spazio sotto */
 }
 
-.containermenù{
-    background-color: #f4f4f4;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 2px;
-    flex: 0.5 1 20px; /* Permette ai container di avere una base di 300px ma di crescere se c'è spazio */
-    margin-bottom: 20px; /* Spazio tra i container verticalmente */
-	margin-right: 50px;
-	margin-left: 50px;
-    border: none; /* Rimuove il bordo esterno */
-	align-self: baseline;
-	order: 2;
-}
-
-.container2 {
-    background-color: #f4f4f4;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 2px;
-    flex: 1 1 80px; /* Permette ai container di avere una base di 300px ma di crescere se c'è spazio */
-    margin-bottom: 20px; /* Spazio tra i container verticalmente */
-	border: 0;
-	margin-right: 50px;
-	margin-left: 50px;	
-	align-self: baseline;
-	order: 1;	
-}
-
-.container4 {
-    background-color: #f4f4f4;
-    font-size: 13px;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 2px;
-    flex: 2 1 300px; /* Permette ai container di avere una base di 300px ma di crescere se c'è spazio */
-    margin-bottom: 20px; /* Spazio tra i container verticalmente */
-	margin-right: 50px;
-	margin-left: 50px;		
-    border: none; /* Rimuove il bordo esterno */
-	order: 4;
-}
-
-.container-large {
-    flex: 1 1 450px; /* La "Score Table" occuperà più spazio rispetto agli altri container */
-	align-self: baseline;
-	margin-right: 50px;
-	margin-left: 50px;
-	order: 3;
-}
 
 .option-buttons {
     display: flex;
@@ -681,7 +619,6 @@ table input[type="number"] {
 }
 
 /* Touch-action e layering */
-body { touch-action: pan-y; }
 #container01 { touch-action: pan-y; }
 .menu-backdrop { touch-action: none; }
 
@@ -716,3 +653,225 @@ body { touch-action: pan-y; }
 
 /* Assicura che i tooltip stiano sopra al pannello */
 .tooltip-text { z-index: 1500; position: relative; }
+
+/* ===== LAYOUT CONTAINER1 ⇢ FRECCIA ⇢ CONTAINER2 ===== */
+
+/* Desktop / schermo largo */
+.main-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 40px auto;
+  box-sizing: border-box;
+}
+
+/* Colonne affiancate */
+.main-row .container,
+.main-row .container2 {
+  flex: 1 1 0;
+  max-width: 500px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Freccia in mezzo, orizzontale */
+.main-row .arrow {
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 40px;      /* aiuta ad allinearla più o meno a metà visiva */
+  transform: rotate(0deg);
+}
+
+.main-row .arrow svg {
+  width: 100%;
+  height: 100%;
+  stroke: #ff0000;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ===== Mobile / schermo stretto ===== */
+@media (max-width: 900px) {
+  .main-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-width: 700px;
+  }
+
+  .main-row .container,
+  .main-row .container2 {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .main-row .arrow {
+    /* niente order */
+    margin: 20px auto;
+    transform: rotate(90deg); /* freccia giù */
+  }
+}
+/* Wrapper scrollabile per la tabella delle specifiche */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;      /* abilita lo scroll orizzontale solo qui */
+    -webkit-overflow-scrolling: touch; /* scroll fluido su iOS/Android */
+    border: 2px solid #ff0000;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+/* La tabella dentro deve avere una larghezza minima fissa,
+   così le colonne non collassano tutte strette */
+.table-wrapper table {
+    min-width: 700px;      /* puoi aumentare/ridurre se serve leggibilità */
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;   /* colonne più uniformi */
+}
+
+/* Celle della tabella: tieni lo stile rosso che già avevi */
+.table-wrapper table td,
+.table-wrapper table th {
+    border: 2px solid #ff0000;
+    padding: 6px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #fff;
+    color: #000;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.table-wrapper table th {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+
+
+/* ===== WRAPPER SCORRIBILE DELLA TABELLA SPECIFICHE ===== */
+.specifiche-wrapper {
+    width: 100%;
+    max-width: 1200px;        /* per tenerla centrata su desktop */
+    margin: 20px auto;
+    overflow-x: auto;         /* abilita swipe laterale su schermi stretti */
+    -webkit-overflow-scrolling: touch;
+    background-color: #fff;   /* stesso bianco della tabella */
+}
+
+/* ===== TABELLA SPECIFICHE =====
+   Usa questa classe sul tuo <table> delle specifiche */
+.specifiche-table {
+    width: 100%;
+    min-width: 900px;         /* forza lo scroll mobile se lo schermo è stretto */
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 13px;
+    font-weight: bold;
+    color: #000;
+    background-color: #fff;
+}
+
+/* Celle normali */
+.specifiche-table th,
+.specifiche-table td {
+    border: 2px solid #ff0000; /* lo stesso bordo rosso che hai già */
+    padding: 8px;
+    text-align: center;
+    background-color: #fff;
+    color: #000;
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Titolo "Dettaglio del calcolo relativo al programma infusionale"
+   (prima riga della tabella, quella con una sola cella che span-na tutte le colonne):
+   -> resta bianco, testo nero, centrato. */
+.specifiche-table tr:first-child th,
+.specifiche-table tr:first-child td {
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    white-space: normal;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Riga delle intestazioni di colonna (Volume ml / Na mEq / ...):
+   è la SECONDA riga nella tua tabella.
+   -> resta bianca con testo nero, bordi rossi esattamente come nello screenshot. */
+.specifiche-table tr:nth-child(2) th {
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Righe dati (Perdite, Perdite Prevedibili, ...):
+   dalla terza riga in giù. Rimangono bianche. */
+.specifiche-table tr:nth-child(n+3) td {
+    background-color: #fff;
+    color: #000;
+}
+
+/* ===== PRIMA COLONNA STICKY =====
+   Qui blocchiamo la colonna di sinistra ("Perdite", "Perdite Prevedibili", ecc.)
+   mentre si scrolla in orizzontale sul telefono.
+*/
+.specifiche-table tr:nth-child(n+2) th:first-child,
+.specifiche-table tr:nth-child(n+2) td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;               /* sopra le altre celle quando scorri */
+    text-align: left;
+    padding-left: 8px;
+    min-width: 140px;         /* larghezza minima leggibile */
+    max-width: 200px;
+    background-color: #fff;   /* IMPORTANTISSIMO: resta bianco */
+    color: #000;
+}
+
+/* Nota: la primissima riga (il titolo lungo) non deve essere sticky */
+.specifiche-table tr:first-child th:first-child,
+.specifiche-table tr:first-child td:first-child {
+    position: static;
+    left: auto;
+    z-index: auto;
+    text-align: center;
+    min-width: auto;
+    max-width: none;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Responsive: stringiamo padding/font su schermi molto piccoli */
+@media (max-width: 480px) {
+    .specifiche-table th,
+    .specifiche-table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .specifiche-table tr:nth-child(n+2) th:first-child,
+    .specifiche-table tr:nth-child(n+2) td:first-child {
+        min-width: 120px;
+        max-width: 160px;
+    }
+}
+
+
