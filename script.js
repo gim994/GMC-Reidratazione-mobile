@@ -699,14 +699,16 @@ document.getElementById('glucosioOutputValue').textContent = Totmgkgmin.toFixed(
         tableRows[5].cells[2].textContent = SodioDaPerdereRecuperare.toFixed(0);
     }
 
-    if (tableRows.length > 8) {
-        tableRows[8].cells[1].textContent = TotMl.toFixed(0);
-        tableRows[8].cells[2].textContent = TotMeq.toFixed(0);
-        tableRows[8].cells[3].textContent = TotMlkg.toFixed(0);
-        tableRows[8].cells[4].textContent = Totmlh.toFixed(0);
-        tableRows[8].cells[5].textContent = TotMeql.toFixed(0);
-        tableRows[8].cells[6].textContent = Totmgkgmin.toFixed(0);
-    }
+// Totale (riga 6 = index 6)
+if (tableRows.length > 6) {
+    tableRows[6].cells[1].textContent = TotMl.toFixed(0);
+    tableRows[6].cells[2].textContent = TotMeq.toFixed(0);
+    tableRows[6].cells[3].textContent = TotMlkg.toFixed(0);
+    tableRows[6].cells[4].textContent = Totmlh.toFixed(0);
+    tableRows[6].cells[5].textContent = TotMeql.toFixed(0);
+    tableRows[6].cells[6].textContent = Totmgkgmin.toFixed(0);
+}
+
 	
 	    if (tableRows.length > 12) {
         tableRows[10].cells[0].textContent = AcquaPerc;
