@@ -1,3 +1,890 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: left;
+    background-color: #f4f4f4;
+
+    display: block;
+    margin: 0;
+    padding: 20px 10px;
+
+    touch-action: pan-y;
+}
+
+/* Mostra solo la lingua selezionata */
+:root[data-ui-lang="it"] .lang-en,
+html[data-ui-lang="it"] .lang-en,
+body[data-ui-lang="it"] .lang-en { display: none !important; }
+
+:root[data-ui-lang="en"] .lang-it,
+html[data-ui-lang="en"] .lang-it,
+body[data-ui-lang="en"] .lang-it { display: none !important; }
+
+
+
+.header {
+    display: flex;
+    align-items: center; /* Allinea verticalmente */
+    justify-content: space-evenly; /* Distribuisce spazio tra testo e logo */
+    gap: 10px; /* Spaziatura tra logo e testo */
+    padding: 10px;
+}
+
+#logo {
+    height: 150px; /* Altezza iniziale */
+    width: auto; /* Mantiene le proporzioni */
+}
+
+
+#infoBox {
+    display: block; /* Visibile all'avvio */
+}
+
+#formulebox {
+    display: none; /* Nascosto all'avvio */
+}
+ 
+ // 🔒 Nascondi definitivamente il blocco dei pulsanti
+.option-buttons {
+  display: none;
+}
+
+/* Stile per il cerchietto con il punto interrogativo */
+.input-container label {
+    margin-right: 4px; /* Spazio tra l'etichetta e l'icona */
+    white-space: nowrap; /* Impedisce che l'etichetta vada a capo */
+}
+
+.output-container label {
+    margin-right: 4px; /* Spazio tra l'etichetta e l'icona */
+    white-space: nowrap; /* Impedisce che l'etichetta vada a capo */
+}
+
+/* ===== ICONA "?" SEMPRE UGUALE ===== */
+.tooltip-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+
+    background-color: #ff0000;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+
+    position: relative;     /* l'icona è il riferimento per il tooltip */
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
+/* ===== TOOLTIP BASE (desktop) ===== */
+.tooltip-text {
+    display: none;
+    position: absolute;
+    top: -5px;
+    left: 30px;             /* a destra del pallino */
+    max-width: 280px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    white-space: normal;
+    font-size: 14px;
+    line-height: 1.4;
+    z-index: 2000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* mostra su hover desktop o se JS mette .show */
+.tooltip-icon:hover .tooltip-text,
+.tooltip-icon .tooltip-text.show {
+    display: block;
+}
+
+/* ===== MOBILE FINO A 600px ===== */
+@media (max-width: 600px) {
+
+  /* l'icona resta identica */
+  .tooltip-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  /* tooltip mobile:
+     - lo mettiamo SOTTO l'icona
+     - limitiamo la larghezza all'80% viewport
+     - e lo spostiamo leggermente a sinistra così non esce fuori dallo schermo a destra
+  */
+  .tooltip-icon .tooltip-text {
+    top: 28px;              /* sotto il pallino */
+    left: auto;
+    right: 0;               /* agganciato al bordo destro dell'icona */
+    transform: translateX( -49px ); 
+    max-width: 80vw;
+    min-width: 140px;
+    width: max-content;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    padding: 10px;
+    z-index: 3000;
+
+    display: none; /* resta nascosto finché non è hover/.show */
+  }
+
+  /* mostrare su hover/tap */
+  .tooltip-icon:hover .tooltip-text,
+  .tooltip-icon .tooltip-text.show {
+    display: block;
+  }
+}
+
+
+
+.info-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  max-height: 100vh;
+  background-color: #f4f4f4;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow-y: auto;
+  line-height: 1.6;
+}
+
+.info-box p {
+  margin-bottom: 15px;
+  text-align: justify; /* Per allineare il testo sui due margini */
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.info-box ol {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.info-box ol li {
+  margin-bottom: 10px; /* Aggiungi spazio tra ogni elemento della lista */
+}
+
+.info-box button {
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-left: 40px;
+  margin-bottom: 100px;
+  padding: 15px 30px; /* Aumenta il padding per ingrandire il pulsante */
+  height: auto; /* Imposta un'altezza automatica se vuoi che si adatti al contenuto */
+  font-size: 18px; /* Aumenta la dimensione del testo */	
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.info-box button:hover {
+  background-color: #0056b3;
+}
+
+
+.container,
+.container2,
+.container-large,
+.container4,
+.containermenù {
+    background-color: #f4f4f4;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 2px;
+    border: none;
+
+    /* nuovo layout responsive */
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+    margin: 0 auto 20px auto; /* centrato e con spazio sotto */
+}
+
+
+.option-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.option-buttons1 {
+    display: flex;
+    flex-direction: column; /* Dispone i bottoni in colonna */
+    flex-wrap: wrap; /* Permette ai bottoni di andare a capo */
+	justify-content: space-between; /* Spazio uniforme tra i bottoni */
+    margin-bottom: 15px;
+	gap: 15px; /* Spazio tra i bottoni */
+    width: 100%;
+}
+
+.square-btn {
+    flex-grow: 1;
+    height: 35px;
+    border: 2px solid #ff0000;
+    border-radius: 2px;
+    background-color: white;
+    color: #ff0000;
+    cursor: pointer;
+    transition: background-color 0.1s, color 0.1s;
+    font-size: 13px;
+    margin: 0 5px;
+}
+
+.square-btn.active {
+    background-color: #ff0000;
+    color: white;
+}
+
+.input-container, .output-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 4px;
+    flex: 1 1 100%; /* Fa sì che gli elementi riempiano tutta la larghezza disponibile */
+}
+
+.input-container label, .output-container label {
+    margin-top: 5px;
+	margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.input-container input, 
+.output-container input, 
+.input-container select, 
+.output-container select, 
+.output-field {
+    padding: 10px;
+    border: 2px solid #ff0000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+	margin-right: 10px;
+}
+
+.output-container .output-field {
+    height: 40px;
+    margin-top: 10px;
+	text-align: center;
+}
+
+.age-selection {
+    display: flex;
+    align-items: center;
+}
+
+.age-selection select {
+    margin-right: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.hidden-maintain-space {
+    display: none; /* Nasconde completamente l'elemento */
+    flex: 0 0 auto; /* Assicura che non occupi spazio */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #ff0000;
+}
+
+table td, table th {
+    border: 2px solid #ff0000;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+table th {
+    background-color: #ff0000;
+    color: white;
+}
+
+table td {
+    background-color: #fff;
+    color: #000;
+}
+
+.hidden-container {
+    display: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.score-select {
+    width: 100%;
+    padding: 5px;
+    border: 2px solid #ff0000;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.square-btn.active {
+    background-color: #ff0000;
+    color: white;
+}
+
+.square-btn {
+    flex-grow: 1;
+    height: 35px;
+    border: 2px solid #ff0000;
+    border-radius: 2px;
+    background-color: white;
+    color: #ff0000;
+    cursor: pointer;
+    transition: background-color 0.1s, color 0.1s;
+    font-size: 13px;
+    margin: 0 5px;
+}
+
+.infusione-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.infusione-output-field {
+    width: 50px; 
+    padding: 5px;
+    border: 2px solid #ff0000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center; /* Centra il testo all'interno degli input */
+	margin-right: 5px
+}
+
+.infusionemldoppio-output-field {
+    padding: 10px;
+    border: 2px solid #ff0000;
+    border-radius: 4px;
+    box-sizing: border-box;
+	margin-top: 10px;
+    width: 100%;
+	text-align: center;
+}
+
+.infusione-row label {
+    margin-right: 10px;
+    font-weight: bold;
+    text-align: right;
+}
+
+
+.solution-select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ff0000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Spazio sotto il selettore */	
+}
+
+table input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    border: 2px solid #ff0000;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+
+
+    .container {
+    min-width: 100%; /* I container prendono tutta la larghezza disponibile su schermi stretti */
+    flex: 1 1 100%; 	
+	margin-bottom: 20px; /* Spazio tra i container verticalmente */
+	margin-right: 10px;
+	margin-left: 10px;	
+    }
+
+	
+	.container2 {
+	min-width: 100%;	
+    flex: 1 1 100%; /* Permette ai container di avere una base di 300px ma di crescere se c'è spazio */
+    margin-bottom: 20px; /* Spazio tra i container verticalmente */
+	margin-right: 10px;
+	margin-left: 10px;	
+}
+	
+	.header {
+        flex-direction: column; /* Impila il logo e il testo verticalmente */
+        align-items: center; /* Centra il contenuto */
+        text-align: center; /* Centra il testo */
+        gap: 15px; /* Più spazio tra elementi */
+    }
+
+    #logo {
+        height: 120px; /* Riduce leggermente il logo */
+    }
+	
+	.containermenù{
+        flex-direction: row; /* Dispone i bottoni in riga */	
+        flex-wrap: wrap; /* Permette ai bottoni di andare a capo */
+}
+	
+	
+    .option-buttons1 {
+        flex-direction: row; /* Dispone i bottoni in riga */
+        flex-wrap: wrap; /* Permette ai bottoni di andare a capo se necessario */
+        justify-content: space-between; /* Spazio uniforme tra i bottoni */
+        gap: 15px; /* Spaziatura tra i bottoni */
+    }
+
+    .option-buttons1 button {
+        flex: 1 1 calc(33.33% - 15px); /* Ogni bottone occupa un terzo dello spazio meno il gap */
+        min-width: 120px; /* Larghezza minima per evitare che i bottoni diventino troppo piccoli */
+        text-align: center; /* Centra il testo dei bottoni */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+    min-width: 100%; /* I container prendono tutta la larghezza disponibile su schermi stretti */
+    flex: 1 1 100%; 	
+	margin-bottom: 20px; /* Spazio tra i container verticalmente */
+	margin-right: 10px;
+	margin-left: 10px;	
+    }
+
+	
+	.container2 {
+	min-width: 100%;	
+    flex: 1 1 100%; /* Permette ai container di avere una base di 300px ma di crescere se c'è spazio */
+    margin-bottom: 20px; /* Spazio tra i container verticalmente */
+	margin-right: 10px;
+	margin-left: 10px;	
+}
+
+    .square-btn {
+        width: 100px;
+    }
+	    .info-box button {
+        width: 100%; /* Il pulsante sarà largo l'80% della larghezza disponibile */
+        padding: 10px 0; /* Un padding più equilibrato */
+        font-size: 1.2rem; /* Usa rem per una dimensione proporzionata del testo */
+    }
+	
+	    .header {		
+	    min-width: 100%;	
+        flex-direction: column; /* Continua a impilare */
+        align-items: center; /* Rimane centrato */
+        text-align: center; /* Testo centrato */
+        gap: 10px;
+    }
+
+    #logo {
+        height: 100px; /* Riduce ulteriormente il logo */
+    }	
+	
+		.containermenù{
+        flex-direction: row; /* Dispone i bottoni in riga */	
+        flex-wrap: wrap; /* Permette ai bottoni di andare a capo */
+}
+	
+    .option-buttons1 {
+        flex-direction: row; /* Rimane in riga */
+        flex-wrap: wrap; /* Permette ai bottoni di andare a capo */
+        gap: 10px; /* Spaziatura più ridotta su schermi piccoli */
+    }
+
+    .option-buttons1 button {
+        flex: 1 1 calc(50% - 10px); /* Ogni bottone occupa metà dello spazio disponibile */
+        min-width: 100px; /* Riduce ulteriormente la larghezza minima */
+        text-align: center; /* Centra il testo dei bottoni */
+    }
+	}
+	
+	/* Menu laterale a scomparsa */
+#container01.containermenù {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  max-width: 86vw;
+  bottom: 0;
+  height: auto;
+  max-height: none;
+  overflow-y: auto;
+  z-index: 980;
+  transform: translateX(-105%);
+  -webkit-transform: translateX(-100%);
+  transition: transform .28s ease;
+  -webkit-transition: -webkit-transform .28s ease;
+  box-shadow: 6px 0 30px rgba(0,0,0,.25);
+  margin: 0;
+  border-radius: 0;
+}
+
+#container01.is-open {
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+}
+
+#container01.is-dragging {
+  transition: none;
+  -webkit-transition: none;
+}
+
+/* Bottone hamburger */
+.menu-hamburger {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1501;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #ff0000;
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+}
+.menu-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  margin: 5px auto;
+}
+
+/* Backdrop */
+.menu-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,.4);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 970;
+  transition: opacity .28s ease;
+}
+.menu-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Pulsante X di chiusura */
+.menu-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1200;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #333;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  font-size: 20px;
+  line-height: 36px;
+  text-align: center;
+  cursor: pointer;
+}
+.menu-close:focus-visible {
+  outline: 2px solid #ff0000;
+  outline-offset: 2px;
+}
+
+/* Nascondi il bottone hamburger quando il menu è aperto */
+.menu-hamburger.is-hidden {
+  visibility: hidden;
+}
+
+/* Touch-action e layering */
+#container01 { touch-action: pan-y; }
+.menu-backdrop { touch-action: none; }
+
+/* I tooltip dentro #container01 devono comportarsi diversamente */
+#container01 .tooltip-icon { position: static; }
+
+#container01 .tooltip-icon .tooltip-text {
+  position: absolute;
+  top: 36px;
+  left: 10px;
+  right: 10px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font-size: 12px;
+  line-height: 1.35;
+  z-index: 1;
+  display: none;
+}
+
+#container01 .tooltip-icon:hover .tooltip-text,
+#container01 .tooltip-text.show {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #container01, .menu-backdrop {
+    transition: none !important;
+    -webkit-transition: none !important;
+  }
+}
+
+/* Assicura che i tooltip stiano sopra al pannello */
+.tooltip-text { z-index: 1500; position: relative; }
+
+/* ===== LAYOUT CONTAINER1 ⇢ FRECCIA ⇢ CONTAINER2 ===== */
+
+/* Desktop / schermo largo */
+.main-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 40px auto;
+  box-sizing: border-box;
+}
+
+/* Colonne affiancate */
+.main-row .container,
+.main-row .container2 {
+  flex: 1 1 0;
+  max-width: 500px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Freccia in mezzo, orizzontale */
+.main-row .arrow {
+  flex: 0 0 auto;
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 40px;      /* aiuta ad allinearla più o meno a metà visiva */
+  transform: rotate(0deg);
+}
+
+.main-row .arrow svg {
+  width: 100%;
+  height: 100%;
+  stroke: #ff0000;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ===== Mobile / schermo stretto ===== */
+@media (max-width: 900px) {
+  .main-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-width: 700px;
+  }
+
+  .main-row .container,
+  .main-row .container2 {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .main-row .arrow {
+    /* niente order */
+    margin: 20px auto;
+    transform: rotate(90deg); /* freccia giù */
+  }
+}
+/* Wrapper scrollabile per la tabella delle specifiche */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;      /* abilita lo scroll orizzontale solo qui */
+    -webkit-overflow-scrolling: touch; /* scroll fluido su iOS/Android */
+    border: 2px solid #ff0000;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+/* La tabella dentro deve avere una larghezza minima fissa,
+   così le colonne non collassano tutte strette */
+.table-wrapper table {
+    min-width: 700px;      /* puoi aumentare/ridurre se serve leggibilità */
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;   /* colonne più uniformi */
+}
+
+/* Celle della tabella: tieni lo stile rosso che già avevi */
+.table-wrapper table td,
+.table-wrapper table th {
+    border: 2px solid #ff0000;
+    padding: 6px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #fff;
+    color: #000;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.table-wrapper table th {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+
+
+/* ===== WRAPPER SCORRIBILE DELLA TABELLA SPECIFICHE ===== */
+.specifiche-wrapper {
+    width: 100%;
+    max-width: 1200px;        /* per tenerla centrata su desktop */
+    margin: 20px auto;
+    overflow-x: auto;         /* abilita swipe laterale su schermi stretti */
+    -webkit-overflow-scrolling: touch;
+    background-color: #fff;   /* stesso bianco della tabella */
+}
+
+/* ===== TABELLA SPECIFICHE =====
+   Usa questa classe sul tuo <table> delle specifiche */
+.specifiche-table {
+    width: 100%;
+    min-width: 900px;         /* forza lo scroll mobile se lo schermo è stretto */
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 13px;
+    font-weight: bold;
+    color: #000;
+    background-color: #fff;
+}
+
+/* Celle normali */
+.specifiche-table th,
+.specifiche-table td {
+    border: 2px solid #ff0000; /* lo stesso bordo rosso che hai già */
+    padding: 8px;
+    text-align: center;
+    background-color: #fff;
+    color: #000;
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Titolo "Dettaglio del calcolo relativo al programma infusionale"
+   (prima riga della tabella, quella con una sola cella che span-na tutte le colonne):
+   -> resta bianco, testo nero, centrato. */
+.specifiche-table tr:first-child th,
+.specifiche-table tr:first-child td {
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    white-space: normal;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Riga delle intestazioni di colonna (Volume ml / Na mEq / ...):
+   è la SECONDA riga nella tua tabella.
+   -> resta bianca con testo nero, bordi rossi esattamente come nello screenshot. */
+.specifiche-table tr:nth-child(2) th {
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Righe dati (Perdite, Perdite Prevedibili, ...):
+   dalla terza riga in giù. Rimangono bianche. */
+.specifiche-table tr:nth-child(n+3) td {
+    background-color: #fff;
+    color: #000;
+}
+
+/* ===== PRIMA COLONNA STICKY =====
+   Qui blocchiamo la colonna di sinistra ("Perdite", "Perdite Prevedibili", ecc.)
+   mentre si scrolla in orizzontale sul telefono.
+*/
+.specifiche-table tr:nth-child(n+2) th:first-child,
+.specifiche-table tr:nth-child(n+2) td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;               /* sopra le altre celle quando scorri */
+    text-align: left;
+    padding-left: 8px;
+    min-width: 140px;         /* larghezza minima leggibile */
+    max-width: 200px;
+    background-color: #fff;   /* IMPORTANTISSIMO: resta bianco */
+    color: #000;
+}
+
+/* Nota: la primissima riga (il titolo lungo) non deve essere sticky */
+.specifiche-table tr:first-child th:first-child,
+.specifiche-table tr:first-child td:first-child {
+    position: static;
+    left: auto;
+    z-index: auto;
+    text-align: center;
+    min-width: auto;
+    max-width: none;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Responsive: stringiamo padding/font su schermi molto piccoli */
+@media (max-width: 480px) {
+    .specifiche-table th,
+    .specifiche-table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .specifiche-table tr:nth-child(n+2) th:first-child,
+    .specifiche-table tr:nth-child(n+2) td:first-child {
+        min-width: 120px;
+        max-width: 160px;
+    }
+}
+
+
 /* ===== TOGGLE LINGUA (definitivo) ===== */
 .lang-toggle-inline,
 #infoBox .header .lang-toggle-inline {
